@@ -19,7 +19,7 @@
 		return monsterJson
 		
 		} catch (error) {
-		
+			
 		}
 	}
 	
@@ -28,6 +28,7 @@
 		console.log(monsters) 
 		return ( 
 		<>
+			<input type="search" placeholder="search monsters"/>
 			<CardList monsters={monsters}/>
 		</>
 		);

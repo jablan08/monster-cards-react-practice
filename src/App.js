@@ -1,5 +1,7 @@
 	import React, { Component } from 'react';
+	import SearchBox from "./components/SearchBox/SearchBox"
 	import CardList from "./components/Card-list/Card-list"
+	import "./App.css"
 	class App extends Component {
 	state = { 
 		monsters: [],
@@ -34,10 +36,11 @@
 			monster.name.toLowerCase().includes(search.toLowerCase())
 		)
 		return ( 
-		<>
-			<input type="search" placeholder="search monsters" name="search" onChange={this.handleChange}/>
+		<div className="App">
+			<SearchBox placeholder="search monsters"
+			handleChange={this.handleChange}/>
 			<CardList monsters={filtered}/>
-		</>
+		</div>
 		);
 	}
 	}

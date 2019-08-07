@@ -2,7 +2,8 @@
 	import CardList from "./components/Card-list/Card-list"
 	class App extends Component {
 	state = { 
-		monsters: []
+		monsters: [],
+		search: ""
 	}
 
 	componentDidMount() {
@@ -12,11 +13,15 @@
 		})
 		})
 	}
+	handleChange = e => 
+		this.setState({
+			[e.target.name]: e.target.value
+		})
 	getMonsters = async () => {
 		try {
-		const monsterCall = await fetch("https://jsonplaceholder.typicode.com/users")
-		const monsterJson = await monsterCall.json()
-		return monsterJson
+			const monsterCall = await fetch("https://jsonplaceholder.typicode.com/users")
+			const monsterJson = await monsterCall.json()
+			return monsterJson
 		
 		} catch (error) {
 			
@@ -24,12 +29,14 @@
 	}
 	
 	render() {
-		const { monsters } = this.state
-		console.log(monsters) 
+		const { monsters, search } = this.state
+		const filtered = monsters.filter(monster => 
+			monster.name.toLowerCase().includes(search.toLowerCase())
+		)
 		return ( 
 		<>
-			<input type="search" placeholder="search monsters"/>
-			<CardList monsters={monsters}/>
+			<input type="search" placeholder="search monsters" name="search" onChange={this.handleChange}/>
+			<CardList monsters={filtered}/>
 		</>
 		);
 	}
